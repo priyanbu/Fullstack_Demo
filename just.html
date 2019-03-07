@@ -1,0 +1,49 @@
+<html>
+    <head>
+  <title></title>
+    </head>
+    <body>
+     <h1>json</h1>
+     <script>
+         var requestURL = "http://localhost:3000/users";
+         var request = new XMLHttpRequest();
+         request.open('GET',requestURL);
+         console.log('request check',request)
+         request.responseType = 'json';
+         request.send();
+
+         request.onload = function() {
+  var employeeData = request.response.data;
+
+console.log('employeeData',employeeData);
+DisplayName(employeeData);
+}
+
+function DisplayName(obj){
+ 
+
+    for(var i = 0; i < obj.length ; i++){
+
+    var para = document.createElement('p');
+    var b = document.createElement('b');
+    var span = document.createElement('span');
+    
+    b.textContent = 'Name : ';
+    para.appendChild(b);
+    span.textContent = obj[i].name;
+    para.appendChild(span);    
+
+    document.body.appendChild(para);
+  }
+    
+
+
+}
+
+ 
+
+
+
+         </script>
+    </body>
+</html>

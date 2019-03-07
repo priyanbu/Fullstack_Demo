@@ -1,0 +1,74 @@
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <h1>json</h1>
+
+    <button onclick="Display()">click me</button>
+    <form action="http://localhost:3000/todo" method="post">
+        <div style="margin-left:10rem;">
+            <label for="say">Enter Name</label>
+            <input type="text" name="charactor" value="" placeholder="enter ur name">
+        </div>
+
+        <div>
+            <button style="margin-left: 14rem;margin-top: 20px;">Send</button>
+
+        </div>
+    </form> `
+    <script>
+
+
+
+        var isOnceCall = true;
+        function Display() {
+
+
+            if (isOnceCall) {
+
+                var requestURL = "http://localhost:3000/users";
+                var request = new XMLHttpRequest();
+                request.open('GET', requestURL);
+                console.log('request check', request)
+                request.responseType = 'json';
+                request.send();
+
+                request.onload = function () {
+                    var employeeData = request.response.data;
+                    //  console.log('employeeData',employeeData,request);
+                    DisplayName(employeeData);
+                }
+
+                function DisplayName(obj) {
+
+                    for (var i = 0; i < obj.length; i++) {
+                        var para = document.createElement('p');
+                        var b = document.createElement('b');
+                        var span = document.createElement('span');
+
+                        b.textContent = 'Name :';
+                        para.appendChild(b);
+                        span.textContent = obj[i].name;
+                        para.appendChild(span);
+
+                        document.body.appendChild(para);
+
+
+                        //  console.log('for loop ',i, obj[i])
+                    }
+
+
+
+                }
+
+
+                isOnceCall = false;
+            }
+        }
+    </script>
+</body>
+
+</html>
